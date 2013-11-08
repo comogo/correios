@@ -31,13 +31,14 @@ function Correios() {
 Correios.prototype.track = function (code, callback) {
   var url = this.WEBSRO + code;
   var http = require('http');
+  var iconv = new require('iconv').Iconv('latin1', 'utf-8');
   var self = this;
 
   http.get(url, function (res) {
     var page = "";
 
     res.on('data', function onData(chunk) {
-      page += chunk.toString();
+      page += iconv.convert(chunk).toString();
     });
 
     res.on('end', function onEnd(data, encoding) {

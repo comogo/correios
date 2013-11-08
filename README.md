@@ -11,6 +11,7 @@ This program depends on the folowing npm packages:
 
 * cheerio
 * colors
+* iconv
 
 How to use
 ----------
