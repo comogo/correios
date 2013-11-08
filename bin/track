@@ -16,7 +16,7 @@ correio.track(args[0], function (track_data) {
   track_data.forEach(function (item) {
     console.log("Date:     %s", item.date);
     console.log("Location: %s", item.location);
-    console.log("Status:   %s", item.status);
+    console.log("Status:   %s", correio.STATUS[item.status]);
 
     if (item.details) {
       console.log("Details:  %s", item.details);

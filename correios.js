@@ -31,6 +31,7 @@ function Correios() {
 Correios.prototype.track = function (code, callback) {
   var url = this.WEBSRO + code;
   var http = require('http');
+  var self = this;
 
   http.get(url, function (res) {
     var page = "";
@@ -50,15 +51,22 @@ Correios.prototype.track = function (code, callback) {
         var columns = $row.find('td');
         var $first_column = $(columns[0]);
         var rowspan = $first_column.attr('rowspan');
+        var item_status = "";
 
-        if ($first_column.text() == 'Data')
-          continue;
+        if ($first_column.text() == 'Data') continue;
+
+        // Set status
+        for (var key in self.STATUS) {
+          if (self.STATUS[key] == $(columns[2]).text()){
+            item_status = key;
+          }
+        }
 
         if (rowspan == 1) {
           result.push({
             date: $first_column.text(),
             location: $(columns[1]).text(),
-            status: $(columns[2]).text()
+            status: item_status
           });
         } else {
           if (rowspan == 2) {
@@ -70,7 +78,7 @@ Correios.prototype.track = function (code, callback) {
               date: $first_column.text(),
               details: $(details).text(),
               location: $(columns[1]).text(),
-              status: $(columns[2]).text()
+              status: item_status
             });
           }
         }
