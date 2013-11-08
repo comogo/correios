@@ -10,6 +10,7 @@ Dependencies
 This program depends on the folowing npm packages:
 
 * cheerio
+* colors
 
 How to use
 ----------
