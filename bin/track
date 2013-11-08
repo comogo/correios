@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+var args = process.argv.splice(2);
+
+if (args.length != 1) {
+  console.error("You need to specify the track number");
+  process.exit();
+}
+
+var Correios = require('../correios.js');
+var correio = new Correios();
+
+correio.track(args[0], function (track_data) {
+  console.log('==================================================');
+
+  track_data.forEach(function (item) {
+    console.log("Date:     %s", item.date);
+    console.log("Location: %s", item.location);
+    console.log("Status:   %s", item.status);
+
+    if (item.details) {
+      console.log("Details:  %s", item.details);
+    }
+
+    console.log('--------------------------------------------------');
+  });
+});

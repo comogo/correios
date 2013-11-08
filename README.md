@@ -15,5 +15,5 @@ How to use
 ----------
 
 ```bash
-$ node correios.js YOUR_TRACKING_CODE
+$ ./bin/track YOUR_TRACKING_CODE
 ```
