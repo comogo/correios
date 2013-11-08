@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-WEBSRO = 'http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=';
+var WEBSRO = 'http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=';
 
-var cheerio = require('cheerio'),
-    http    = require('http'),
-    args = process.argv.splice(2);
+var cheerio = require('cheerio');
+var http = require('http');
+var args = process.argv.splice(2);
 
 if (args.length != 1) {
   process.exit();
@@ -13,15 +13,15 @@ if (args.length != 1) {
 var url = WEBSRO + args[0];
 
 function buildData(data) {
-  var $ = cheerio.load(data),
-      result = [],
-      rows = $('table tr');
+  var $ = cheerio.load(data);
+  var result = [];
+  var rows = $('table tr');
 
   for (var i=0; i < rows.length; i++) {
-    var $row = $(rows[i]),
-        columns = $row.find('td'),
-        $first_column = $(columns[0])
-        rowspan = $first_column.attr('rowspan');
+    var $row = $(rows[i]);
+    var columns = $row.find('td');
+    var $first_column = $(columns[0]);
+    var rowspan = $first_column.attr('rowspan');
 
     if ($first_column.text() == 'Data')
       continue;
@@ -74,16 +74,16 @@ function processResponse(data) {
 }
 
 
-http.get(url, function(res) {
+http.get(url, function (res) {
   var page = "";
 
   res.setEncoding('utf8');
 
-  res.on('data', function (chunk) {
+  res.on('data', function onData(chunk) {
     page += chunk.toString();
   });
 
-  res.on('end', function (data, encoding) {
+  res.on('end', function onEnd(data, encoding) {
     processResponse(page);
   });
 });
