@@ -1,0 +1,29 @@
+{
+  "name": "correios",
+  "version": "1.0.0",
+  "description": "Correios tracking",
+  "main": "correios.js",
+  "bin": {
+    "track": "./bin/track.js"
+  },
+  "dependencies": {
+    "cheerio": "^0.12.4",
+    "colors": "^0.6.2",
+    "iconv": "^2.1.8",
+    "stringformat": "^0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comogo/correios.git"
+  },
+  "author": "Mateus Lorandi <mcomogo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/comogo/correios/issues"
+  },
+  "homepage": "https://github.com/comogo/correios#readme"
+}
